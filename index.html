@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Patas & Cia - Pet shop em Florianópolis com banho e tosa, consultas veterinárias e muito carinho pelo seu pet.">
+  <!-- Cor da barra do navegador no celular, seguindo a cor da marca -->
+  <meta name="theme-color" content="#E8722C">
+  <title>Patas & Cia | Pet Shop</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Cabeçalho fixo com o menu de navegação -->
+  <header class="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <!-- Logo em SVG: patinha + nome da marca -->
+      <a href="#inicio" class="logo" aria-label="Patas & Cia - início">
+        <svg viewBox="0 0 64 64" width="36" height="36" aria-hidden="true">
+          <circle cx="20" cy="22" r="7" fill="#E8722C"/>
+          <circle cx="44" cy="22" r="7" fill="#E8722C"/>
+          <circle cx="10" cy="36" r="6" fill="#E8722C"/>
+          <circle cx="54" cy="36" r="6" fill="#E8722C"/>
+          <ellipse cx="32" cy="44" rx="14" ry="12" fill="#E8722C"/>
+        </svg>
+        <span>Patas <em>&amp;</em> Cia</span>
+      </a>
+
+      <!-- Botão do menu para telas pequenas -->
+      <button id="botao-menu" class="botao-menu" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav id="menu" class="menu">
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#contato" class="menu-cta">Agendar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Seção de Destaque (hero) -->
+    <section id="inicio" class="hero">
+      <div class="container hero-conteudo">
+        <div class="hero-texto">
+          <span class="hero-selo">🐾 Desde 2018 em Florianópolis</span>
+          <h1>Cuidado de verdade para quem te ama de verdade</h1>
+          <p>Banho e tosa, veterinário e tudo que o seu melhor amigo merece,
+             com o carinho de quem trata cada pet como família.</p>
+          <div class="hero-botoes">
+            <a href="#contato" class="botao">Agendar banho</a>
+            <a href="#servicos" class="botao botao-contorno">Nossos serviços</a>
+          </div>
+        </div>
+
+        <!-- Imagem em destaque com elementos sobrepostos (position) -->
+        <div class="hero-imagem">
+          <div class="hero-circulo"></div>
+          <img src="img/hero-dog.png" alt="Cachorro feliz da Patas & Cia" class="hero-foto" width="1024" height="1024">
+          <div class="hero-badge">
+            <strong>+2.500</strong>
+            <span>pets felizes</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Seção Sobre -->
+    <section id="sobre" class="sobre">
+      <div class="container">
+        <h2 class="titulo-secao">Quem somos</h2>
+        <p class="subtitulo-secao">Um pet shop de bairro com coração grande</p>
+
+        <div class="sobre-grade">
+          <img src="img/sobre-equipe.jpg" alt="Equipe da Patas & Cia com um cachorro e um gato na loja" class="sobre-foto" width="1200" height="800">
+          <div class="sobre-texto">
+            <h3>Nossa história</h3>
+            <p>A Patas &amp; Cia nasceu em 2018, no bairro Trindade, em Florianópolis,
+               do sonho de transformar o cuidado com os pets em algo mais próximo e
+               acolhedor. Começamos com uma banheira, um secador e muita vontade de
+               fazer diferente.</p>
+            <p>Hoje somos uma equipe de 12 profissionais apaixonados, com estrutura
+               completa de banho e tosa, atendimento veterinário e uma lojinha cheia
+               de mimos. Mas uma coisa não mudou: aqui, cada pet é recebido pelo nome
+               e tratado como parte da família.</p>
+          </div>
+        </div>
+
+        <!-- Indicadores com contadores animados via JavaScript -->
+        <ul class="indicadores">
+          <li><strong class="contador" data-alvo="2500">0</strong><span>pets atendidos</span></li>
+          <li><strong class="contador" data-alvo="8">0</strong><span>anos de experiência</span></li>
+          <li><strong class="contador" data-alvo="49" data-decimal="sim">0</strong><span>nota média</span></li>
+          <li><strong class="contador" data-alvo="12">0</strong><span>profissionais</span></li>
+        </ul>
+      </div>
+    </section>
+    <!-- Seção de Serviços -->
+    <section id="servicos" class="servicos">
+      <div class="container">
+        <h2 class="titulo-secao">Nossos serviços</h2>
+        <p class="subtitulo-secao">Tudo que o seu pet precisa em um só lugar</p>
+        <!-- Os cards são gerados pelo JavaScript a partir de um array -->
+        <div id="lista-servicos" class="lista-servicos"></div>
+      </div>
+    </section>
+    <!-- Seção de Depoimentos -->
+    <section id="depoimentos" class="depoimentos">
+      <div class="container">
+        <h2 class="titulo-secao">Quem já confiou na gente</h2>
+        <p class="subtitulo-secao">Depoimentos de tutores de verdade</p>
+
+        <div class="carrossel">
+          <button type="button" id="botao-anterior" class="carrossel-botao" aria-label="Depoimento anterior">&#8249;</button>
+          <figure class="depoimento-card">
+            <img id="depoimento-foto" src="img/depoimento-1.jpg" alt="Foto de cliente">
+            <blockquote id="depoimento-texto"></blockquote>
+            <figcaption>
+              <strong id="depoimento-nome"></strong>
+              <span id="depoimento-pet"></span>
+            </figcaption>
+          </figure>
+          <button type="button" id="botao-proximo" class="carrossel-botao" aria-label="Próximo depoimento">&#8250;</button>
+        </div>
+      </div>
+    </section>
+    <!-- Seção de Contato -->
+    <section id="contato" class="contato">
+      <div class="container contato-grade">
+        <div class="contato-info">
+          <h2 class="titulo-secao">Agende uma visita</h2>
+          <p>Preencha o formulário que a gente entra em contato, ou chame direto no WhatsApp.</p>
+          <ul class="contato-lista">
+            <li>📍 Rua das Gaivotas, 123 - Trindade, Florianópolis/SC</li>
+            <li>📞 (48) 99999-0000</li>
+            <li>🕐 Seg a Sáb, das 8h às 19h</li>
+          </ul>
+        </div>
+
+        <form id="form-contato" class="formulario" novalidate>
+          <div class="campo">
+            <label for="nome">Nome *</label>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome">
+            <span class="mensagem-erro" id="erro-nome"></span>
+          </div>
+          <div class="campo">
+            <label for="email">E-mail *</label>
+            <input type="email" id="email" name="email" placeholder="voce@email.com">
+            <span class="mensagem-erro" id="erro-email"></span>
+          </div>
+          <div class="campo">
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" name="telefone" placeholder="(48) 90000-0000">
+            <span class="mensagem-erro" id="erro-telefone"></span>
+          </div>
+          <div class="campo">
+            <label for="pet">Nome do pet</label>
+            <input type="text" id="pet" name="pet" placeholder="Como seu pet se chama?">
+          </div>
+          <div class="campo">
+            <label for="servico">Serviço de interesse</label>
+            <select id="servico" name="servico">
+              <option value="">Escolha um serviço</option>
+              <option>Banho e Tosa</option>
+              <option>Consulta Veterinária</option>
+              <option>Vacinação</option>
+              <option>Pet Táxi</option>
+              <option>Hotelzinho</option>
+              <option>Loja de Produtos</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="mensagem">Mensagem *</label>
+            <textarea id="mensagem" name="mensagem" rows="4" placeholder="Conte o que seu pet precisa"></textarea>
+            <span class="mensagem-erro" id="erro-mensagem"></span>
+          </div>
+          <button type="submit" class="botao">Enviar mensagem</button>
+          <div id="mensagem-sucesso" class="mensagem-sucesso"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container rodape-conteudo">
+      <div>
+        <p class="rodape-logo">🐾 Patas &amp; Cia</p>
+        <p>Cuidando do seu melhor amigo desde 2018.</p>
+      </div>
+      <div>
+        <p><strong>Endereço</strong></p>
+        <p>Rua das Gaivotas, 123 - Trindade<br>Florianópolis/SC</p>
+      </div>
+      <div>
+        <p><strong>Horários</strong></p>
+        <p>Segunda a sábado<br>8h às 19h</p>
+      </div>
+    </div>
+    <p class="rodape-copy">© 2026 Patas &amp; Cia - Projeto fictício desenvolvido para fins educacionais.</p>
+  </footer>
+
+  <!-- Botão flutuante de WhatsApp (número fictício) -->
+  <a href="https://wa.me/5548999990000" target="_blank" rel="noopener" class="whatsapp-flutuante" aria-label="Falar no WhatsApp">
+    <!-- SVG decorativo: o texto acessível já vem do aria-label do link -->
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="#FFFFFF" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5 13.9c-.2.6-1.2 1.1-1.7 1.2-.4 0-1 .2-3.3-.7-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3 0 .1 0 .7-.2 1.3z"/></svg>
+  </a>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>

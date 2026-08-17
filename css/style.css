@@ -1,0 +1,756 @@
+/* ==========================================
+   Patas & Cia - Folha de estilos principal
+   ========================================== */
+
+/* Variáveis de cor e fonte da identidade visual */
+:root {
+  --cor-primaria: #E8722C;
+  --cor-fundo: #FFF6EC;
+  --cor-texto: #4A3728;
+  --cor-apoio: #4E7A57; /* verde-folha escurecido para contraste AA */
+  --cor-branco: #FFFFFF;
+  --fonte-titulo: "Baloo 2", sans-serif;
+  --fonte-texto: "Nunito", sans-serif;
+}
+
+/* Reset básico: remove margens e paddings padrão */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Rolagem suave ao clicar nos links do menu */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--fonte-texto);
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--fonte-titulo);
+}
+
+/* height: auto preserva a proporção quando a imagem tem os atributos
+   width/height no HTML (que evitam "pulos" de layout no carregamento) */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Contêiner central que limita a largura do conteúdo */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Título padrão das seções; text-wrap: balance deixa as linhas de
+   títulos quebrados com larguras parecidas (melhora a leitura) */
+.titulo-secao {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 12px;
+  text-wrap: balance;
+}
+
+/* ==========================================
+   Cabeçalho (header fixo com menu)
+   ========================================== */
+
+/* Todas as seções ganham um espaço reservado no topo,
+   para que o cabeçalho fixo não cubra o início do conteúdo
+   quando o usuário clica em um link do menu (âncora) */
+section {
+  scroll-margin-top: 80px;
+}
+
+/* O cabeçalho fica fixo no topo da tela, acima de tudo */
+.cabecalho {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--cor-branco);
+  box-shadow: 0 2px 10px rgba(74, 55, 40, 0.08);
+  z-index: 100;
+}
+
+/* Conteúdo interno do cabeçalho: logo à esquerda, menu à direita */
+.cabecalho-conteudo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+/* Logo: ícone da patinha + nome da marca lado a lado */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--fonte-titulo);
+  font-size: 1.4rem;
+  color: var(--cor-texto);
+  text-decoration: none;
+}
+
+/* O "&" do nome da marca aparece destacado na cor primária */
+.logo em {
+  color: var(--cor-primaria);
+  font-style: normal;
+}
+
+/* Menu de navegação principal (desktop) */
+.menu {
+  display: flex;
+  gap: 28px;
+}
+
+/* Links do menu: cor marrom, sem sublinhado */
+.menu a {
+  color: var(--cor-texto);
+  text-decoration: none;
+}
+
+/* Ao passar o mouse, o link fica na cor laranja da marca */
+.menu a:hover {
+  color: var(--cor-primaria);
+}
+
+/* Botão "Agendar": destaque em formato de pílula */
+.menu-cta {
+  background: var(--cor-primaria);
+  color: var(--cor-branco);
+  padding: 8px 20px;
+  border-radius: 999px;
+}
+
+/* No hover, o "Agendar" mantém o texto branco e só escurece o fundo.
+   Sem esta regra, o hover geral dos links deixaria o texto laranja
+   sobre o fundo laranja da pílula, ficando ilegível */
+.menu a.menu-cta:hover {
+  color: var(--cor-branco);
+  background: #C85E1F;
+}
+
+/* Botão do menu hambúrguer: escondido no desktop */
+.botao-menu {
+  display: none;
+  gap: 5px;
+}
+
+/* Cada um dos três "traços" do ícone hambúrguer */
+.botao-menu span {
+  width: 24px;
+  height: 3px;
+  background: var(--cor-texto);
+}
+
+/* ---------- Versão para telas pequenas (celular/tablet) ---------- */
+@media (max-width: 768px) {
+  /* Mostra o botão do menu hambúrguer; o padding aumenta a área
+     de toque para perto de 44x44px, o mínimo confortável no celular */
+  .botao-menu {
+    display: flex;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 14px 12px;
+  }
+
+  /* O menu vira um painel que desce logo abaixo do cabeçalho,
+     ficando escondido até que o JS adicione a classe .aberto */
+  .menu {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    background: var(--cor-branco);
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 24px 0;
+    box-shadow: 0 8px 16px rgba(74, 55, 40, 0.1);
+    display: none;
+  }
+
+  /* Classe alternada pelo JS ao clicar no botão do menu */
+  .menu.aberto {
+    display: flex;
+  }
+}
+
+/* ==========================================
+   Seção de Destaque (hero)
+   ========================================== */
+
+/* O padding-top de 140px empurra o conteúdo para baixo do
+   cabeçalho fixo (72px de altura); overflow: hidden evita que
+   o círculo laranja "vaze" para fora da seção */
+.hero {
+  padding: 140px 0 80px;
+  overflow: hidden;
+}
+
+/* Duas colunas: texto (mais largo) e imagem, lado a lado */
+.hero-conteudo {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/* Coluna de texto ocupa um pouco mais de espaço que a imagem */
+.hero-texto {
+  flex: 1.2;
+}
+
+/* Selo em formato de pílula, com fundo laranja bem clarinho
+   (mesma cor primária, porém com baixa opacidade via rgba) */
+.hero-selo {
+  display: inline-block;
+  background: rgba(232, 114, 44, 0.12);
+  /* Texto pequeno: usamos marrom (não laranja) para manter contraste
+     de leitura adequado sobre o fundo claro (Task 8 - acessibilidade) */
+  color: var(--cor-texto);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.hero-texto h1 {
+  font-size: 3rem;
+  line-height: 1.15;
+  margin: 16px 0;
+  text-wrap: balance;
+}
+
+/* Botões (CTAs) lado a lado, com respiro entre eles */
+.hero-botoes {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+/* Botão principal: fundo laranja sólido, usado aqui e reaproveitado
+   depois pelo formulário de contato (Task 7) */
+.botao {
+  display: inline-block;
+  background: var(--cor-primaria);
+  color: var(--cor-branco);
+  padding: 14px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  border: 2px solid var(--cor-primaria);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Ao passar o mouse: o botão "levanta" um pouco e ganha uma sombra */
+.botao:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(232, 114, 44, 0.35);
+}
+
+/* Variante contornada: mesma forma, mas sem preenchimento.
+   A borda continua laranja (identidade da marca), mas o texto usa
+   marrom: como é texto pequeno, laranja sobre o fundo claro não
+   teria contraste suficiente (Task 8 - acessibilidade) */
+.botao-contorno {
+  background: transparent;
+  color: var(--cor-texto);
+}
+
+/* ---------- Imagem em destaque com sobreposição (position) ----------
+   .hero-imagem é o "contêiner de referência" (position: relative).
+   Os três elementos dentro dele (círculo, foto e badge) usam
+   position: absolute para se posicionarem uns sobre os outros. */
+.hero-imagem {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1 / 1;
+}
+
+/* Círculo laranja de fundo, preenchendo todo o contêiner */
+.hero-circulo {
+  position: absolute;
+  inset: 0;
+  background: var(--cor-primaria);
+  border-radius: 50%;
+  opacity: 0.9;
+}
+
+/* Foto do cachorro, ancorada na base do círculo e centralizada
+   horizontalmente; fica acima do círculo (z-index: 2) */
+.hero-foto {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 88%;
+  z-index: 2;
+}
+
+/* Badge flutuante ("+2.500 pets felizes"), no canto inferior
+   direito, saindo levemente da borda da imagem (right: -10px);
+   fica acima de tudo (z-index: 3) */
+.hero-badge {
+  position: absolute;
+  bottom: 24px;
+  right: -10px;
+  z-index: 3;
+  background: var(--cor-branco);
+  border-radius: 16px;
+  padding: 10px 18px;
+  box-shadow: 0 8px 20px rgba(74, 55, 40, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Número em destaque dentro do badge, na cor primária e
+   com a fonte de título da marca */
+.hero-badge strong {
+  color: var(--cor-primaria);
+  font-family: var(--fonte-titulo);
+  font-size: 1.3rem;
+}
+
+/* ---------- Versão para telas pequenas (celular/tablet) ---------- */
+@media (max-width: 768px) {
+  /* Empilha texto e imagem, centralizando tudo */
+  .hero-conteudo {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-texto h1 {
+    font-size: 2.2rem;
+  }
+
+  /* Centraliza os botões quando empilhados */
+  .hero-botoes {
+    justify-content: center;
+  }
+
+  /* No desktop o badge sai um pouco da borda da imagem (right: -10px);
+     no celular isso quase vaza da tela, então aqui ele fica dentro
+     dos limites da imagem (Task 8 - responsividade) */
+  .hero-badge {
+    right: 8px;
+  }
+}
+
+/* ==========================================
+   Seção Sobre
+   ========================================== */
+.sobre {
+  padding: 80px 0;
+  background: var(--cor-branco);
+}
+
+/* Frase de apoio abaixo do título da seção.
+   Texto pequeno (1rem): usa marrom em vez de laranja para ter
+   contraste suficiente sobre os fundos claros (Task 8 - acessibilidade) */
+.subtitulo-secao {
+  text-align: center;
+  color: var(--cor-texto);
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+/* Grade com a foto de um lado e o texto do outro (requisito: Grid) */
+.sobre-grade {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.sobre-foto {
+  border-radius: 24px;
+  width: 100%;
+}
+
+.sobre-texto h3 {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+
+.sobre-texto p {
+  margin-bottom: 12px;
+}
+
+/* Lista de indicadores (números animados) em grade de 4 colunas */
+.indicadores {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 56px;
+  list-style: none;
+  text-align: center;
+  background: var(--cor-fundo);
+  border-radius: 24px;
+  padding: 32px 16px;
+}
+
+/* Número grande de cada indicador */
+.indicadores strong {
+  font-family: var(--fonte-titulo);
+  font-size: 2.2rem;
+  color: var(--cor-primaria);
+  display: block;
+}
+
+/* ---------- Versão para telas pequenas (celular/tablet) ---------- */
+@media (max-width: 768px) {
+  /* Empilha foto e texto em uma coluna só */
+  .sobre-grade {
+    grid-template-columns: 1fr;
+  }
+
+  /* Indicadores em duas colunas para caber melhor no celular */
+  .indicadores {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ==========================================
+   Seção de Serviços (cards gerados via array JS)
+   ========================================== */
+.servicos {
+  padding: 80px 0;
+}
+
+/* Grade de 3 colunas para os cards de serviço (requisito: Grid) */
+.lista-servicos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Cada card: fundo branco, cantos arredondados e sombra suave;
+   a transição prepara o efeito de "levantar" no hover */
+.card-servico {
+  background: var(--cor-branco);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 4px 14px rgba(74, 55, 40, 0.07);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Ao passar o mouse, o card sobe um pouco e a sombra fica mais forte */
+.card-servico:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(74, 55, 40, 0.13);
+}
+
+/* Círculo do ícone: aspect-ratio 1/1 garante que a caixa fique sempre
+   quadrada, não importa a largura (requisito: aspect-ratio) */
+.card-icone {
+  aspect-ratio: 1 / 1;
+  width: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(232, 114, 44, 0.12);
+  color: var(--cor-primaria);
+  border-radius: 18px;
+  margin-bottom: 16px;
+}
+
+/* O ícone SVG herda a cor do texto (stroke="currentColor") */
+.card-icone svg {
+  width: 32px;
+  height: 32px;
+}
+
+.card-preco {
+  color: var(--cor-apoio);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.card-preco strong {
+  font-size: 1.1rem;
+}
+
+/* ---------- Versão responsiva dos cards de serviço ----------
+   Escolha: media queries (mesmo padrão usado nas outras seções
+   deste site), em vez de repeat(auto-fit, minmax(...)). */
+@media (max-width: 1024px) {
+  .lista-servicos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .lista-servicos {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================
+   Seção de Depoimentos (carrossel simples)
+   ========================================== */
+.depoimentos {
+  padding: 80px 0;
+  background: var(--cor-branco);
+}
+
+/* Botões de navegação ficam ao lado do card, centralizados */
+.carrossel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.depoimento-card {
+  max-width: 560px;
+  text-align: center;
+  background: var(--cor-fundo);
+  border-radius: 24px;
+  padding: 40px 32px;
+}
+
+#depoimento-foto {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  /* Garante que fotos nao-quadradas nao distorcam */
+  object-fit: cover;
+}
+
+.depoimento-card blockquote {
+  font-style: italic;
+  font-size: 1.1rem;
+  margin: 0 0 20px;
+}
+
+/* Nome do cliente no depoimento: texto pequeno (herda 1rem), então
+   usa marrom em vez de laranja para ter contraste suficiente sobre
+   o fundo creme do card (Task 8 - acessibilidade) */
+.depoimento-card figcaption strong {
+  display: block;
+  color: var(--cor-texto);
+}
+
+.depoimento-card figcaption span {
+  font-size: 0.9rem;
+}
+
+/* Setas do carrossel: circulares, com cores invertidas no hover */
+.carrossel-botao {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--cor-primaria);
+  background: var(--cor-branco);
+  color: var(--cor-primaria);
+  font-size: 1.5rem;
+  cursor: pointer;
+  /* Impede que as setas encolham em telas estreitas */
+  flex-shrink: 0;
+}
+
+.carrossel-botao:hover {
+  background: var(--cor-primaria);
+  color: var(--cor-branco);
+}
+
+/* ==========================================
+   Seção de Contato (formulário)
+   ========================================== */
+
+.contato {
+  padding: 80px 0;
+}
+
+/* Duas colunas: informações de contato e formulário */
+.contato-grade {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* Nesta seção o título fica alinhado à esquerda, junto do texto */
+.contato-info .titulo-secao {
+  text-align: left;
+}
+
+.contato-lista {
+  list-style: none;
+  margin-top: 24px;
+}
+
+.contato-lista li {
+  margin-bottom: 12px;
+}
+
+/* Cartão branco que envolve o formulário */
+.formulario {
+  background: var(--cor-branco);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 4px 14px rgba(74, 55, 40, 0.07);
+}
+
+.campo {
+  margin-bottom: 16px;
+}
+
+.campo label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #E8DCCF;
+  border-radius: 12px;
+  font-family: var(--fonte-texto);
+  font-size: 1rem;
+}
+
+/* Realce ao focar em um campo */
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  border-color: var(--cor-primaria);
+  outline: none;
+}
+
+/* Borda vermelha para campos com erro, aplicada via JS */
+.campo-invalido {
+  border-color: #C03A3A !important;
+}
+
+/* Mensagem de erro de cada campo; altura mínima evita que o
+   formulário "pule" quando o texto de erro aparece ou some */
+.mensagem-erro {
+  color: #C03A3A;
+  font-size: 0.85rem;
+  display: block;
+  min-height: 1.2em;
+}
+
+.mensagem-sucesso {
+  color: var(--cor-apoio);
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+/* Botão de envio: reaproveita .botao (Task 3), mas é um <button>
+   dentro do formulário, então precisa ocupar a largura toda
+   e perder a aparência padrão de botão do navegador */
+button.botao {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+/* ---------- Versão para telas pequenas (celular/tablet) ---------- */
+@media (max-width: 768px) {
+  .contato-grade {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================
+   Rodapé
+   ========================================== */
+
+.rodape {
+  background: var(--cor-texto);
+  color: var(--cor-fundo);
+  padding: 48px 0 16px;
+}
+
+.rodape-conteudo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.rodape-logo {
+  font-family: var(--fonte-titulo);
+  font-size: 1.3rem;
+}
+
+.rodape-copy {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  padding: 0 20px;
+}
+
+/* ==========================================
+   Botão flutuante de WhatsApp
+   ========================================== */
+
+.whatsapp-flutuante {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  z-index: 90;
+  transition: transform 0.2s;
+}
+
+/* Leve aumento ao passar o mouse */
+.whatsapp-flutuante:hover {
+  transform: scale(1.08);
+}
+
+/* ==========================================
+   Preferência por menos movimento
+   ========================================== */
+
+/* Quem ativa "reduzir movimento" nas configurações do sistema
+   recebe a página sem rolagem animada e sem efeitos de transição */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .botao,
+  .card-servico,
+  .whatsapp-flutuante {
+    transition: none;
+  }
+
+  .botao:hover,
+  .card-servico:hover,
+  .whatsapp-flutuante:hover {
+    transform: none;
+  }
+}
